@@ -34,4 +34,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public String getInstanceId(){
         return instanceId;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(isFinishing()){
+            Injector.clearComponent(this);
+        }
+    }
 }
