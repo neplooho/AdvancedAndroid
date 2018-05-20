@@ -5,13 +5,18 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.eugene.advancedandroid.di.Injector;
+import com.example.eugene.advancedandroid.di.ScreenInjector;
 
 import java.util.UUID;
+
+import javax.inject.Inject;
+
 //Our activities will extend this
 public abstract class BaseActivity extends AppCompatActivity {
 
     private static String INSTANCE_ID_KEY = "instance_id";
 
+    @Inject ScreenInjector screenInjector;
     private String instanceId;
 
     @Override
@@ -41,5 +46,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if(isFinishing()){
             Injector.clearComponent(this);
         }
+    }
+
+    public ScreenInjector getScreenInjector() {
+        return screenInjector;
     }
 }
