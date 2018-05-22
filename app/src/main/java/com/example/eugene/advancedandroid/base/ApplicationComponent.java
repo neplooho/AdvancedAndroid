@@ -1,5 +1,8 @@
 package com.example.eugene.advancedandroid.base;
 
+import com.example.eugene.advancedandroid.data.RepoServiceModule;
+import com.example.eugene.advancedandroid.networking.ServiceModule;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -8,6 +11,8 @@ import dagger.Component;
 @Component(modules = {
         ApplicationModule.class,
         ActivityBindingModule.class,
+        ServiceModule.class,
+        RepoServiceModule.class,
 })
 public interface ApplicationComponent {
     void inject(MyApplication myApplication);
