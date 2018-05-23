@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.eugene.advancedandroid">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="false"
