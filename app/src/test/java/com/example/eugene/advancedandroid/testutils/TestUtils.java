@@ -39,7 +39,7 @@ public class TestUtils {
             }
             return sb.toString();
         }catch (IOException e){
-            throw new IllegalArgumentException("Could not read from resourse at: " + path);
+            throw new IllegalArgumentException("Could not read from resource at: " + path);
         }
     }
 
