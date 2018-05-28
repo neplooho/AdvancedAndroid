@@ -14,20 +14,24 @@ public class MyApplication extends Application {
     @Inject
     ActivityInjector activityInjector;
 
-    private ApplicationComponent component;
+    protected ApplicationComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        component = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this)) //it says deprecated because noone is injectiong this yet
-                .build();
+        component = initComponent();
         component.inject(this);
 
         if (BuildConfig.DEBUG){
             Timber.plant(new Timber.DebugTree());
         }
+    }
+
+    protected ApplicationComponent initComponent(){
+        return DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this)) //it says deprecated because noone is injectiong this yet
+                .build();
     }
 
     public ActivityInjector getActivityInjector() {
