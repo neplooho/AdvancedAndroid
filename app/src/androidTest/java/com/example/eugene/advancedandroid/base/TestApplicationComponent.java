@@ -2,6 +2,7 @@ package com.example.eugene.advancedandroid.base;
 
 import com.example.eugene.advancedandroid.data.TestRepoServiceModule;
 import com.example.eugene.advancedandroid.networking.ServiceModule;
+import com.example.eugene.advancedandroid.trending.TrendingReposControllerTest;
 import com.example.eugene.advancedandroid.ui.NavigationModule;
 
 import javax.inject.Singleton;
@@ -19,4 +20,5 @@ import dagger.Component;
 public interface TestApplicationComponent extends ApplicationComponent {
 
 
+    void inject(TrendingReposControllerTest trendingReposControllerTest);
 }
