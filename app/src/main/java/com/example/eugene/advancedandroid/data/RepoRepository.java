@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import io.reactivex.Maybe;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 
@@ -21,30 +23,33 @@ public class RepoRepository {
 
 
     private final Provider<RepoRequester> repoRequesterProvider;
+    private Scheduler scheduler;
     private final List<Repo> cachedTrendingRepos = new ArrayList<>();
     private final Map<String, List<Contributor>> cachedContributors = new HashMap<>();
 
     @Inject
-    RepoRepository(Provider<RepoRequester> repoRequesterProvider) {
+    RepoRepository(Provider<RepoRequester> repoRequesterProvider,
+                   @Named("network_scheduler") Scheduler scheduler) {
         this.repoRequesterProvider = repoRequesterProvider;
+        this.scheduler = scheduler;
     }
 
     public Single<List<Repo>> getTrendingRepos(){
         return Maybe.concat(cachedTrendingRepos(), apiTrendingRepos())
                 .firstOrError()
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(scheduler);
     }
 
     public Single<Repo> getRepo(String repoOwner, String repoName){
         return Maybe.concat(cachedRepo(repoOwner, repoName), apiRepo(repoOwner, repoName))
                 .firstOrError()
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(scheduler);
     }
 
     public Single<List<Contributor>> getContributors(String url) {
         return Maybe.concat(cachedContributors(url), apiContributors(url))
                 .firstOrError()
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(scheduler);
     }
 
     private Maybe<List<Contributor>> cachedContributors(String url){
