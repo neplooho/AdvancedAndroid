@@ -28,6 +28,15 @@ public class TestUtils {
         }
     }
 
+    public static <T> T loadJson(String path, Class<T> clazz){
+        try{
+            String json = getFileString(path);
+            return (T) TEST_MOSHI.adapter(clazz).fromJson(json);
+        }catch (IOException e){
+            throw new IllegalArgumentException("Could not deserialize: " + path + " into class: " + clazz);
+        }
+    }
+
     private static String getFileString(String path) {
         try{
             StringBuilder sb = new StringBuilder();
