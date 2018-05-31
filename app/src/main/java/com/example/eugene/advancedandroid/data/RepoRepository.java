@@ -46,6 +46,11 @@ public class RepoRepository {
                 .subscribeOn(scheduler);
     }
 
+    public void clearCache() {
+        cachedTrendingRepos.clear();
+        cachedContributors.clear();
+    }
+
     public Single<List<Contributor>> getContributors(String url) {
         return Maybe.concat(cachedContributors(url), apiContributors(url))
                 .firstOrError()
@@ -102,4 +107,6 @@ public class RepoRepository {
                 })
                 .toMaybe();
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.eugene.advancedandroid.ui;
 
+import com.example.eugene.advancedandroid.di.ActivityScope;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -8,5 +10,6 @@ import dagger.Provides;
 public abstract class NavigationModule {
 
     @Binds
+    @ActivityScope
     abstract ScreenNavigator provideScreenNavigator(DefaultScreenNavigator screenNavigator);
 }
