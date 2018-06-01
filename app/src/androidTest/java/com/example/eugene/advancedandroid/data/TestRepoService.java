@@ -84,7 +84,7 @@ public class TestRepoService implements RepoService {
     }
 
     public void clearHoldFlags() {
-        this.holdFlags = 0;
+        holdFlags = 0;
     }
 
     private <T> Single<T> holdingSingle(T result, int flag) {

@@ -37,7 +37,7 @@ class RepoDetailsRobot {
     }
 
     RepoDetailsRobot verifyUpdatedDate(String updatedDate) {
-        onView(withId(R.id.tv_creation_date)).check(matches(withText(updatedDate)));
+        onView(withId(R.id.tv_updated_date)).check(matches(withText(updatedDate)));
         return this;
     }
 
