@@ -36,7 +36,7 @@ public class RepoRepositoryTest {
         MockitoAnnotations.initMocks(this);
         when(repoRequesterProvider.get()).thenReturn(repoRequester);
 
-        trendingReposResonse = TestUtils.loadJson("mock/get_trending_repos.json", TrendingReposResponse.class);
+        trendingReposResonse = TestUtils.loadJson("mock/search/get_trending_repos.json", TrendingReposResponse.class);
         when(repoRequester.getTrendingRepos()).thenReturn(Single.just(trendingReposResonse.repos()));
 
         rxJavaRepo = trendingReposResonse.repos().get(0);

@@ -8,3 +8,5 @@
 /build
 /captures
 .externalNativeBuild
+/src/test/resources/mock
+/src/androidTest/resources/mock
