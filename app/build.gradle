@@ -50,6 +50,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
 
     implementation "com.bluelinelabs:conductor:$conductorVersion"
 

@@ -6,6 +6,7 @@ import com.example.eugene.advancedandroid.data.TestRepoServiceModule;
 import com.example.eugene.advancedandroid.networking.ServiceModule;
 import com.example.eugene.advancedandroid.trending.TrendingReposControllerTest;
 import com.example.eugene.advancedandroid.ui.NavigationModule;
+import com.example.eugene.advancedandroid.ui.TestActivityViewInterceptorModule;
 import com.example.eugene.advancedandroid.ui.TestNavigationModule;
 import com.example.eugene.advancedandroid.ui.TestScreenNavigator;
 
@@ -20,6 +21,7 @@ import dagger.Component;
         TestRepoServiceModule.class,
         ServiceModule.class,
         TestNavigationModule.class,
+        TestActivityViewInterceptorModule.class,
 })
 public interface TestApplicationComponent extends ApplicationComponent {
 
