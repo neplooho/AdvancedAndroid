@@ -3,9 +3,9 @@ package com.example.eugene.advancedandroid.ui;
 import com.bluelinelabs.conductor.Controller;
 import com.bluelinelabs.conductor.Router;
 
-public interface ScreenNavigator {
+public interface RouterProvider {
 
-    boolean pop();
+    Router getRouter();
 
-    void goToRepoDetails(String repoOwner, String repoName);
+    Controller initialScreen();
 }
