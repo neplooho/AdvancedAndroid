@@ -9,6 +9,7 @@ import dagger.android.AndroidInjector;
 @ScreenScope
 @Subcomponent(modules = {
         ScreenModule.class,
+        TrendingReposScreenModule.class,
 })
 public interface TrendingReposComponent extends AndroidInjector<TrendingReposController> {
 

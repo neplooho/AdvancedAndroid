@@ -12,6 +12,7 @@ import dagger.android.AndroidInjector;
 @ScreenScope
 @Subcomponent(modules = {
         ScreenModule.class,
+        RepoDetailsScreenModule.class,
 })
 public interface RepoDetailsComponent extends AndroidInjector<RepoDetailsController> {
 
