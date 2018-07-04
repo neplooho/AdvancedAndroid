@@ -1,7 +1,9 @@
 package com.example.eugene.advancedandroid.details;
 
 import com.example.eugene.advancedandroid.data.RepoRepository;
+import com.example.eugene.advancedandroid.di.ForScreen;
 import com.example.eugene.advancedandroid.di.ScreenScope;
+import com.example.eugene.advancedandroid.lifecycle.DisposableManager;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,14 +16,15 @@ class RepoDetailsPresenter {
             @Named("repo_owner") String repoOwner,
             @Named("repo_name") String repoName,
             RepoRepository repoRepository,
-            RepoDetailsViewModel viewModel) {
-        repoRepository.getRepo(repoOwner, repoName)
+            RepoDetailsViewModel viewModel,
+            @ForScreen DisposableManager disposableManager) {
+            disposableManager.add(repoRepository.getRepo(repoOwner, repoName)
                 .doOnSuccess(viewModel.processRepo())
                 .doOnError(viewModel.detailsError())
                 .flatMap(repo -> repoRepository.getContributors(repo.contributorsUrl())
                     .doOnError(viewModel.contributorsError()))
                 .subscribe(viewModel.processContributors(), throwable -> {
                     //We handle logging in the view model
-                });
+                }));
     }
 }

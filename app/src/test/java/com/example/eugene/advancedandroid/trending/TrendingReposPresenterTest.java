@@ -2,6 +2,7 @@ package com.example.eugene.advancedandroid.trending;
 
 import com.example.eugene.advancedandroid.data.RepoRepository;
 import com.example.eugene.advancedandroid.data.TrendingReposResponse;
+import com.example.eugene.advancedandroid.lifecycle.DisposableManager;
 import com.example.eugene.advancedandroid.model.Repo;
 import com.example.eugene.advancedandroid.testutils.TestUtils;
 import com.example.eugene.advancedandroid.ui.ScreenNavigator;
@@ -113,6 +114,6 @@ public class TrendingReposPresenterTest {
     }
 
     private void initializePresenter() {
-        presenter = new TrendingReposPresenter(viewModel, repoRepository, screenNavigator);
+        presenter = new TrendingReposPresenter(viewModel, repoRepository, screenNavigator, Mockito.mock(DisposableManager.class));
     }
 }

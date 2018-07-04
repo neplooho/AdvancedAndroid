@@ -1,6 +1,7 @@
 package com.example.eugene.advancedandroid.details;
 
 import com.example.eugene.advancedandroid.base.ScreenModule;
+import com.example.eugene.advancedandroid.di.ScreenComponent;
 import com.example.eugene.advancedandroid.di.ScreenScope;
 
 import javax.inject.Named;
@@ -14,7 +15,7 @@ import dagger.android.AndroidInjector;
         ScreenModule.class,
         RepoDetailsScreenModule.class,
 })
-public interface RepoDetailsComponent extends AndroidInjector<RepoDetailsController> {
+public interface RepoDetailsComponent extends ScreenComponent<RepoDetailsController> {
 
     @Subcomponent.Builder
     abstract class Builder extends AndroidInjector.Builder<RepoDetailsController> {

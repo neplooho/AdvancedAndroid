@@ -1,6 +1,7 @@
 package com.example.eugene.advancedandroid.details;
 
 import com.example.eugene.advancedandroid.data.RepoRepository;
+import com.example.eugene.advancedandroid.lifecycle.DisposableManager;
 import com.example.eugene.advancedandroid.model.Contributor;
 import com.example.eugene.advancedandroid.model.Repo;
 import com.example.eugene.advancedandroid.testutils.TestUtils;
@@ -9,6 +10,7 @@ import com.squareup.moshi.Types;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
@@ -89,6 +91,6 @@ public class RepoDetailsPresenterTest {
     }
 
     private void initPresenter() {
-        new RepoDetailsPresenter(OWNER, NAME, repoRepository, viewModel);
+        new RepoDetailsPresenter(OWNER, NAME, repoRepository, viewModel, Mockito.mock(DisposableManager.class));
     }
 }
