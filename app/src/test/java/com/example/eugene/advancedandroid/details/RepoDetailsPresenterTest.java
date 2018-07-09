@@ -19,7 +19,6 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +45,7 @@ public class RepoDetailsPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         when(viewModel.processRepo()).thenReturn(repoConsumer);
-        when(viewModel.processContributors()).thenReturn(contributorConsumer);
+        when(viewModel.contributorsLoaded()).thenReturn(contributorConsumer);
         when(viewModel.detailsError()).thenReturn(detailErrorConsumer);
         when(viewModel.contributorsError()).thenReturn(contributorErrorConsumer);
 

@@ -54,7 +54,7 @@ public class RepoDetailsViewModelTest {
 
     @Test
     public void contributors() throws Exception{
-        viewModel.processContributors().accept(contributors);
+        viewModel.contributorsLoaded().accept(contributors);
 
         viewModel.contributors().test().assertValue(
                 ContributorState.builder()
