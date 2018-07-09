@@ -10,13 +10,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 @ScreenScope
 class TrendingReposViewModel {
 
-    private final BehaviorRelay<List<Repo>> reposRelay = BehaviorRelay.create();
     private final BehaviorRelay<Integer> errorRelay = BehaviorRelay.create();
     private final BehaviorRelay<Boolean> loadingRelay = BehaviorRelay.create();
 
@@ -29,9 +29,6 @@ class TrendingReposViewModel {
         return loadingRelay;
     }
 
-    Observable<List<Repo>> repos(){
-        return reposRelay;
-    }
 
     Observable<Integer> error(){
         return errorRelay;
@@ -41,9 +38,8 @@ class TrendingReposViewModel {
         return loadingRelay;
     }
 
-    Consumer<List<Repo>> reposUpdated(){
-        errorRelay.accept(-1);
-        return reposRelay;
+    Action reposUpdated(){
+        return () -> errorRelay.accept(-1);
     }
 
     Consumer<Throwable> onError(){
