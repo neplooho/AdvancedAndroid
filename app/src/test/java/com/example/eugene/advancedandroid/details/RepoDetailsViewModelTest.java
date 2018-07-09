@@ -17,8 +17,6 @@ public class RepoDetailsViewModelTest {
     private RepoDetailsViewModel viewModel;
 
     private Repo repo = TestUtils.loadJson("mock/repos/get_repo.json", Repo.class);
-    private List<Contributor> contributors =
-            TestUtils.loadJson("mock/repos/contributors/get_contributors.json", Types.newParameterizedType(List.class, Contributor.class));
 
     @Before
     public void setUp() throws Exception {
@@ -54,12 +52,11 @@ public class RepoDetailsViewModelTest {
 
     @Test
     public void contributors() throws Exception{
-        viewModel.contributorsLoaded().accept(contributors);
+        viewModel.contributorsLoaded().accept(new Object());
 
         viewModel.contributors().test().assertValue(
                 ContributorState.builder()
                         .loading(false)
-                        .contributors(contributors)
                         .build()
         );
     }
