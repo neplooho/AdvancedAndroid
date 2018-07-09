@@ -6,6 +6,7 @@ import com.example.eugene.advancedandroid.lifecycle.DisposableManager;
 import com.example.eugene.advancedandroid.model.Repo;
 import com.example.eugene.advancedandroid.testutils.TestUtils;
 import com.example.eugene.advancedandroid.ui.ScreenNavigator;
+import com.example.poweradapter.adapter.RecyclerDataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,9 @@ import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -26,14 +29,16 @@ import static org.mockito.Mockito.when;
 
 public class TrendingReposPresenterTest {
 
-    @Mock
-    RepoRepository repoRepository;
+    static {
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler(schedulerCallable -> Schedulers.trampoline());
+    }
+
+    @Mock RepoRepository repoRepository;
     @Mock TrendingReposViewModel viewModel;
     @Mock Consumer<Throwable> onErrorConsumer;
-    @Mock Consumer<List<Repo>> onSuccessConsumer;
     @Mock Consumer<Boolean> loadingConsumer;
-    @Mock
-    ScreenNavigator screenNavigator;
+    @Mock ScreenNavigator screenNavigator;
+    @Mock RecyclerDataSource dataSource;
 
     private TrendingReposPresenter presenter;
 
@@ -42,7 +47,7 @@ public class TrendingReposPresenterTest {
         MockitoAnnotations.initMocks(this);
         when(viewModel.loadingUpdated()).thenReturn(loadingConsumer);
         when(viewModel.onError()).thenReturn(onErrorConsumer);
-        when(viewModel.reposUpdated()).thenReturn(onSuccessConsumer);
+        when(viewModel.reposUpdated()).thenReturn(() -> {});
     }
 
     @Test
@@ -51,7 +56,7 @@ public class TrendingReposPresenterTest {
         initializePresenter();
 
         verify(repoRepository).getTrendingRepos();
-        verify(onSuccessConsumer).accept(repos);
+        verify(dataSource).setData(repos);
         verifyZeroInteractions(onErrorConsumer);
     }
 
@@ -61,7 +66,7 @@ public class TrendingReposPresenterTest {
         initializePresenter();
 
         verify(onErrorConsumer).accept(error);
-        verifyZeroInteractions(onSuccessConsumer);
+        verifyZeroInteractions(dataSource);
     }
 
     @Test
@@ -114,6 +119,7 @@ public class TrendingReposPresenterTest {
     }
 
     private void initializePresenter() {
-        presenter = new TrendingReposPresenter(viewModel, repoRepository, screenNavigator, Mockito.mock(DisposableManager.class));
+        presenter = new TrendingReposPresenter(viewModel, repoRepository, screenNavigator,
+                Mockito.mock(DisposableManager.class), dataSource);
     }
 }
