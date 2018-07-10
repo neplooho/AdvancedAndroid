@@ -3,6 +3,7 @@ package com.example.eugene.advancedandroid.base;
 import com.example.eugene.advancedandroid.data.RepoRepository;
 import com.example.eugene.advancedandroid.data.TestRepoService;
 import com.example.eugene.advancedandroid.data.TestRepoServiceModule;
+import com.example.eugene.advancedandroid.database.DatabaseModule;
 import com.example.eugene.advancedandroid.networking.ServiceModule;
 import com.example.eugene.advancedandroid.trending.TrendingReposControllerTest;
 import com.example.eugene.advancedandroid.ui.NavigationModule;
@@ -22,6 +23,7 @@ import dagger.Component;
         ServiceModule.class,
         TestNavigationModule.class,
         TestActivityViewInterceptorModule.class,
+        DatabaseModule.class,
 })
 public interface TestApplicationComponent extends ApplicationComponent {
 
